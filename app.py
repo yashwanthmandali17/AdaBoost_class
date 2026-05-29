@@ -34,18 +34,18 @@ def get_model_and_splits():
 df = get_data()
 
 # ── Sidebar navigation ────────────────────────────────────────────────────────
-st.sidebar.title("❤️ Heart Disease Predictor")
+st.sidebar.title("Heart Disease Predictor")
 st.sidebar.markdown("AdaBoost Classifier")
 page = st.sidebar.radio(
     "Navigate",
-    ["🏠 Home", "📊 EDA", "📈 Model Performance", "🔮 Prediction"],
+    ["Home", "EDA", " Model Performance", "Prediction"],
 )
 
 # ══════════════════════════════════════════════════════════════════════════════
 # HOME
 # ══════════════════════════════════════════════════════════════════════════════
-if page == "🏠 Home":
-    st.title("❤️ Heart Disease Prediction")
+if page == "Home":
+    st.title("Heart Disease Prediction")
     st.markdown(
         """
         This app uses an **AdaBoost Classifier** (ensemble of Decision Tree stumps)
@@ -85,8 +85,8 @@ if page == "🏠 Home":
 # ══════════════════════════════════════════════════════════════════════════════
 # EDA
 # ══════════════════════════════════════════════════════════════════════════════
-elif page == "📊 EDA":
-    st.title("📊 Exploratory Data Analysis")
+elif page == "EDA":
+    st.title("Exploratory Data Analysis")
 
     # --- Target distribution
     st.subheader("Target Distribution")
@@ -179,8 +179,8 @@ elif page == "📊 EDA":
 # ══════════════════════════════════════════════════════════════════════════════
 # MODEL PERFORMANCE
 # ══════════════════════════════════════════════════════════════════════════════
-elif page == "📈 Model Performance":
-    st.title("📈 Model Performance")
+elif page == "Model Performance":
+    st.title("Model Performance")
 
     model, X_train, X_test, y_train, y_test = get_model_and_splits()
     y_pred = model.predict(X_test)
@@ -294,8 +294,8 @@ elif page == "📈 Model Performance":
 # ══════════════════════════════════════════════════════════════════════════════
 # PREDICTION
 # ══════════════════════════════════════════════════════════════════════════════
-elif page == "🔮 Prediction":
-    st.title("🔮 Predict Heart Disease Risk")
+elif page == "Prediction":
+    st.title("Predict Heart Disease Risk")
     st.markdown("Enter the patient's clinical data to get a risk prediction.")
 
     col1, col2 = st.columns(2)
@@ -331,7 +331,7 @@ elif page == "🔮 Prediction":
                                         format_func=lambda x:
                                             ["Normal", "Fixed Defect", "Reversible Defect"][x])
 
-    if st.button("❤️ Predict Risk", type="primary"):
+    if st.button("Predict Risk", type="primary"):
         model  = joblib.load("models/adaboost_classifier.pkl")
         scaler = joblib.load("models/scaler.pkl")
 
@@ -348,9 +348,9 @@ elif page == "🔮 Prediction":
         probability = model.predict_proba(sample_sc)[0][1]
 
         if prediction == 1:
-            st.error(f"### ⚠️ High Risk: Heart Disease Detected")
+            st.error(f"### High Risk: Heart Disease Detected")
         else:
-            st.success(f"### ✅ Low Risk: No Heart Disease Detected")
+            st.success(f"### Low Risk: No Heart Disease Detected")
 
         st.metric("Disease Probability", f"{probability * 100:.1f}%")
 
